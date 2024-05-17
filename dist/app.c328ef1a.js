@@ -28910,18 +28910,47 @@ if ("development" === 'production') {
     }
   };
 }
-},{"react-dom":"node_modules/react-dom/index.js"}],"logofoodsite.png":[function(require,module,exports) {
-module.exports = "/logofoodsite.20144a86.png";
-},{}],"app.js":[function(require,module,exports) {
+},{"react-dom":"node_modules/react-dom/index.js"}],"assests/images/logofoodsite.png":[function(require,module,exports) {
+module.exports = "/logofoodsite.98229317.png";
+},{}],"src/components/Header.jsx":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-var _client = _interopRequireDefault(require("react-dom/client"));
-var _logofoodsite = _interopRequireDefault(require("./logofoodsite.png"));
+var _logofoodsite = _interopRequireDefault(require("../../assests/images/logofoodsite.png"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+var Title = function Title() {
+  return /*#__PURE__*/_react.default.createElement("img", {
+    className: "logo",
+    alt: "logo",
+    src: _logofoodsite.default
+  });
+};
+var NavComponent = function NavComponent() {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "nav-items"
+  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, "Home"), /*#__PURE__*/_react.default.createElement("li", null, "About"), /*#__PURE__*/_react.default.createElement("li", null, "Contact"), /*#__PURE__*/_react.default.createElement("li", null, "Cart")));
+};
+var Header = function Header() {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement(NavComponent, null));
+};
+var _default = exports.default = Header;
+},{"react":"node_modules/react/index.js","../../assests/images/logofoodsite.png":"assests/images/logofoodsite.png"}],"src/components/config.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.restaurantList = exports.IMG_CDN = void 0;
+var IMG_CDN = exports.IMG_CDN = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/";
+
 //Config Driven UI - Mock Data from API
-var restaurantList = [{
+var restaurantList = exports.restaurantList = [{
   type: "restaurant",
   data: {
     type: "F",
@@ -29588,67 +29617,177 @@ var restaurantList = [{
   },
   subtype: "basic"
 }];
+},{}],"src/components/RestaurantCard.jsx":[function(require,module,exports) {
+"use strict";
 
-// const imgCdn = "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
-var imgCdn = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/";
-var Title = function Title() {
-  return /*#__PURE__*/_react.default.createElement("img", {
-    className: "logo",
-    alt: "logo",
-    src: _logofoodsite.default
-  });
-};
-var NavComponent = function NavComponent() {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "nav-items"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, "Home"), /*#__PURE__*/_react.default.createElement("li", null, "About"), /*#__PURE__*/_react.default.createElement("li", null, "Contact"), /*#__PURE__*/_react.default.createElement("li", null, "Cart")));
-};
-var Header = function Header() {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "header"
-  }, /*#__PURE__*/_react.default.createElement(Title, null), /*#__PURE__*/_react.default.createElement(NavComponent, null));
-};
-var RestaurantCard = function RestaurantCard(_ref) {
-  var name = _ref.name,
-    cuisines = _ref.cuisines,
-    cloudinaryImageId = _ref.cloudinaryImageId,
-    avgRating = _ref.avgRating,
-    lastMileTravelString = _ref.lastMileTravelString;
-  console.log("url ::", imgCdn + cloudinaryImageId);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _config = require("../components/config");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// import imgCdn 
+
+var RestaurantCard = function RestaurantCard(data) {
+  // console.log("data",data);
+  // console.log("data 2::",data.data.cuisines.join(", "));
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "card"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: imgCdn + cloudinaryImageId,
-    alt: name
+    src: _config.IMG_CDN + data.data.cloudinaryImageId,
+    alt: data.data.name
   }), /*#__PURE__*/_react.default.createElement("span", {
     className: "card-title"
-  }, name), /*#__PURE__*/_react.default.createElement("span", {
+  }, data.data.name), /*#__PURE__*/_react.default.createElement("span", {
     className: "card-tags"
-  }, cuisines.join(", ")), /*#__PURE__*/_react.default.createElement("span", {
+  }, data.data.cuisines.join(", ")), /*#__PURE__*/_react.default.createElement("span", {
     className: "card-rating"
-  }, avgRating), /*#__PURE__*/_react.default.createElement("h4", null, lastMileTravelString, " minutes"));
+  }, data.data.avgRating), /*#__PURE__*/_react.default.createElement("h4", null, data.data.lastMileTravelString, " minutes"));
 };
-var RestaurantList = function RestaurantList() {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "restaurant-list"
-  }, restaurantList.map(function (restaurant) {
-    return /*#__PURE__*/_react.default.createElement(RestaurantCard, _extends({}, restaurant.data, {
-      key: restaurant.data.id
-    }));
-  }));
-};
+var _default = exports.default = RestaurantCard;
+},{"react":"node_modules/react/index.js","../components/config":"src/components/config.jsx"}],"src/components/Body.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _config = require("../components/config");
+var _RestaurantCard = _interopRequireDefault(require("../components/RestaurantCard"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // Import the restaurantList directly from the config file
 var Body = function Body() {
-  return /*#__PURE__*/_react.default.createElement(RestaurantList, null);
+  var _useState = (0, _react.useState)([{
+      id: "73017",
+      name: "Singh Soup",
+      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
+      city: "22",
+      avgRating: "4.5",
+      area: "Anand Vihar Colony",
+      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
+      cuisines: ["American", "Snacks", "Biryani"],
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 31,
+      slugs: {
+        restaurant: "kfc-chukkuwala-chukkuwala",
+        city: "dehradun"
+      },
+      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
+      locality: "Clock Tower"
+    }, {
+      id: "73014",
+      name: "Bikanerwala",
+      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
+      city: "22",
+      area: "Anand Vihar Colony",
+      avgRating: "3.0",
+      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
+      cuisines: ["American", "Snacks", "Biryani"],
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 31,
+      slugs: {
+        restaurant: "kfc-chukkuwala-chukkuwala",
+        city: "dehradun"
+      },
+      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
+      locality: "Clock Tower"
+    }, {
+      id: "73013",
+      name: "Kumar Sweets",
+      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
+      city: "22",
+      area: "Anand Vihar Colony",
+      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
+      cuisines: ["American", "Snacks", "Biryani"],
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 31,
+      avgRating: "3.0",
+      slugs: {
+        restaurant: "kfc-chukkuwala-chukkuwala",
+        city: "dehradun"
+      },
+      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
+      locality: "Clock Tower"
+    }, {
+      id: "73012",
+      name: "MacD",
+      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
+      city: "22",
+      area: "Anand Vihar Colony",
+      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
+      cuisines: ["American", "Snacks", "Biryani"],
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 31,
+      avgRating: "4.6",
+      slugs: {
+        restaurant: "kfc-chukkuwala-chukkuwala",
+        city: "dehradun"
+      },
+      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
+      locality: "Clock Tower"
+    }]),
+    _useState2 = _slicedToArray(_useState, 2),
+    listOfRestaurant = _useState2[0],
+    setListOfRestaurant = _useState2[1];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "filtercontainer"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn",
+    onClick: function onClick() {
+      // console.log("btn clicked");
+      var FilteredList = listOfRestaurant.filter(function (restaurant) {
+        return restaurant.avgRating > 4;
+      });
+      // console.log("FilteredList", FilteredList);
+      setListOfRestaurant(FilteredList);
+    }
+  }, "Top Rated Restaurant")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "restaurant-list"
+  }, listOfRestaurant.map(function (restaurant) {
+    return /*#__PURE__*/_react.default.createElement(_RestaurantCard.default, {
+      data: restaurant,
+      key: restaurant.id
+    });
+  })));
 };
+var _default = exports.default = Body;
+},{"react":"node_modules/react/index.js","../components/config":"src/components/config.jsx","../components/RestaurantCard":"src/components/RestaurantCard.jsx"}],"src/components/Footer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Footer = function Footer() {
   return /*#__PURE__*/_react.default.createElement("h4", null, "Footer");
 };
+var _default = exports.default = Footer;
+},{"react":"node_modules/react/index.js"}],"app.js":[function(require,module,exports) {
+"use strict";
+
+var _react = _interopRequireDefault(require("react"));
+var _client = _interopRequireDefault(require("react-dom/client"));
+var _Header = _interopRequireDefault(require("./src/components/Header"));
+var _Body = _interopRequireDefault(require("./src/components/Body"));
+var _Footer = _interopRequireDefault(require("./src/components/Footer"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var AppLayout = function AppLayout() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(Header, null), /*#__PURE__*/_react.default.createElement(Body, null), /*#__PURE__*/_react.default.createElement(Footer, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_Body.default, null), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
 };
 var root = _client.default.createRoot(document.getElementById("root"));
 root.render( /*#__PURE__*/_react.default.createElement(AppLayout, null));
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./logofoodsite.png":"logofoodsite.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","./src/components/Header":"src/components/Header.jsx","./src/components/Body":"src/components/Body.jsx","./src/components/Footer":"src/components/Footer.jsx"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29673,7 +29812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57456" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50866" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
