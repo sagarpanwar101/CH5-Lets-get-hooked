@@ -29058,7 +29058,7 @@ var restaurantList = exports.restaurantList = [{
       iconType: "EMPTY"
     },
     promoted: true,
-    avgRating: "4.0",
+    avgRating: "4.2",
     totalRatings: 5000,
     new: false
   },
@@ -29168,7 +29168,7 @@ var restaurantList = exports.restaurantList = [{
       iconType: "EMPTY"
     },
     promoted: false,
-    avgRating: "3.8",
+    avgRating: "3.9",
     totalRatings: 50,
     new: false
   },
@@ -29391,7 +29391,7 @@ var restaurantList = exports.restaurantList = [{
       iconType: "EMPTY"
     },
     promoted: true,
-    avgRating: "4.2",
+    avgRating: "3.2",
     totalRatings: 5000,
     new: false
   },
@@ -29611,7 +29611,7 @@ var restaurantList = exports.restaurantList = [{
       iconType: "EMPTY"
     },
     promoted: false,
-    avgRating: "--",
+    avgRating: "4.9",
     totalRatings: 0,
     new: false
   },
@@ -29664,100 +29664,72 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // Import the restaurantList directly from the config file
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var filterData = function filterData(searchText, restaurant) {
+  return restaurant.filter(function (restaurant) {
+    return restaurant.data.name.toLowerCase().includes(searchText, toLowerCase());
+  });
+};
 var Body = function Body() {
-  var _useState = (0, _react.useState)([{
-      id: "73017",
-      name: "Singh Soup",
-      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
-      city: "22",
-      avgRating: "4.5",
-      area: "Anand Vihar Colony",
-      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-      cuisines: ["American", "Snacks", "Biryani"],
-      costForTwoString: "₹300 FOR TWO",
-      deliveryTime: 31,
-      slugs: {
-        restaurant: "kfc-chukkuwala-chukkuwala",
-        city: "dehradun"
-      },
-      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
-      locality: "Clock Tower"
-    }, {
-      id: "73014",
-      name: "Bikanerwala",
-      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
-      city: "22",
-      area: "Anand Vihar Colony",
-      avgRating: "3.0",
-      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-      cuisines: ["American", "Snacks", "Biryani"],
-      costForTwoString: "₹300 FOR TWO",
-      deliveryTime: 31,
-      slugs: {
-        restaurant: "kfc-chukkuwala-chukkuwala",
-        city: "dehradun"
-      },
-      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
-      locality: "Clock Tower"
-    }, {
-      id: "73013",
-      name: "Kumar Sweets",
-      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
-      city: "22",
-      area: "Anand Vihar Colony",
-      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-      cuisines: ["American", "Snacks", "Biryani"],
-      costForTwoString: "₹300 FOR TWO",
-      deliveryTime: 31,
-      avgRating: "3.0",
-      slugs: {
-        restaurant: "kfc-chukkuwala-chukkuwala",
-        city: "dehradun"
-      },
-      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
-      locality: "Clock Tower"
-    }, {
-      id: "73012",
-      name: "MacD",
-      uuid: "27ff4155-fe46-418e-9862-ab98953bf953",
-      city: "22",
-      area: "Anand Vihar Colony",
-      cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-      cuisines: ["American", "Snacks", "Biryani"],
-      costForTwoString: "₹300 FOR TWO",
-      deliveryTime: 31,
-      avgRating: "4.6",
-      slugs: {
-        restaurant: "kfc-chukkuwala-chukkuwala",
-        city: "dehradun"
-      },
-      address: "KFC Restaurant, Khasra No 1281/1291, Opp Dr Manish Jain hospital, Chakrata road, Dehradun-248001",
-      locality: "Clock Tower"
-    }]),
+  var _useState = (0, _react.useState)(_config.restaurantList),
     _useState2 = _slicedToArray(_useState, 2),
     listOfRestaurant = _useState2[0],
     setListOfRestaurant = _useState2[1];
+  var _useState3 = (0, _react.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchQuery = _useState4[0],
+    setSearchQuery = _useState4[1];
+
+  //----------------------------- dont remove these comments --------------------------------------------
+  // console.log("restaurantlist::",restaurantList);
+
+  // useEffect(()=> {
+  //   console.log("restaurantList from config",restaurantList);
+  //   setListOfRestaurant(restaurantList);
+  // },[]);
+
+  // useEffect(()=> {
+  //   console.log("listofRestaurant::",listOfRestaurant);
+  // },[listOfRestaurant]);
+
+  var handleSearch = function handleSearch(event) {
+    setSearchQuery(event.target.value);
+    var filteredList = _config.restaurantList.filter(function (restaurant) {
+      return restaurant.data.name.toLowerCase().includes(event.target.value.toLowerCase());
+    });
+    setListOfRestaurant(filteredList);
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "search-container"
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    placeholder: "Search restaurants",
+    value: searchQuery,
+    className: "search-input",
+    onChange: handleSearch
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    className: "searchBtn"
+  }, "Search")), /*#__PURE__*/_react.default.createElement("div", {
     className: "filtercontainer"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "filter-btn",
     onClick: function onClick() {
       // console.log("btn clicked");
       var FilteredList = listOfRestaurant.filter(function (restaurant) {
-        return restaurant.avgRating > 4;
+        return restaurant.data.avgRating > 4;
       });
       // console.log("FilteredList", FilteredList);
+
       setListOfRestaurant(FilteredList);
     }
   }, "Top Rated Restaurant")), /*#__PURE__*/_react.default.createElement("div", {
     className: "restaurant-list"
-  }, listOfRestaurant.map(function (restaurant) {
+  }, listOfRestaurant.length > 0 ? listOfRestaurant.map(function (restaurant) {
     return /*#__PURE__*/_react.default.createElement(_RestaurantCard.default, {
-      data: restaurant,
-      key: restaurant.id
+      data: restaurant.data,
+      key: restaurant.data.id
     });
-  })));
+  }) : /*#__PURE__*/_react.default.createElement("p", null, "No restaurants available")));
 };
 var _default = exports.default = Body;
 },{"react":"node_modules/react/index.js","../components/config":"src/components/config.jsx","../components/RestaurantCard":"src/components/RestaurantCard.jsx"}],"src/components/Footer.jsx":[function(require,module,exports) {
@@ -29812,7 +29784,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50866" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53020" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

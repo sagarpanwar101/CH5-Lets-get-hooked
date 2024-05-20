@@ -9,7 +9,7 @@
   - then import that component inside appdotjs/main file (import <comp> from "./components/Header")
   - Never put hard coded data in app (utils folder is used)
   - Named export to exprt for more than one thing from a single file (Name component)
-
+ 
 Two types of Export/Import 
 
 --Default Export/Import--
