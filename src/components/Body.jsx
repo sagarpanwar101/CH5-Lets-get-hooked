@@ -1,67 +1,83 @@
 import React, { useEffect, useState } from "react";
-import { restaurantList } from "../components/config";
+import { GET_RES_API_URL, restaurantList } from "../components/config";
 import RestaurantCard from "../components/RestaurantCard";
-
-
-const  filterData = (searchText, restaurant) => {
-  return restaurant.filter(restaurant=> restaurant.data.name.toLowerCase().includes(searchText,toLowerCase()));
-}
+import Shimmer from "../components/Shimmer";
 
 
 const Body = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState(restaurantList);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const [FilteredList, setFilteredList] = useState([]);
+  const [searchText, setsearchText] = useState("");
 
+// Whenever react state updates, react triggers reconcilation cycle (re-renders the component)
+const filterData = (searchText, restaurants) => {
+  return restaurants.filter(restaurant =>
+    restaurant.data.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+}
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-//----------------------------- dont remove these comments --------------------------------------------
-  // console.log("restaurantlist::",restaurantList);
+  const fetchData = async () => {
+    try {
+      const data = await fetch(GET_RES_API_URL);
+      const json = await data.json();
+      const restList = []
+      // console.log(json.data);
+      json?.data?.cards.forEach((value) => {
+        if (value?.card?.card?.gridElements?.infoWithStyle?.restaurants) {
+          value?.card?.card?.gridElements?.infoWithStyle?.restaurants.forEach((val) => {
+            restList.push(val);
+          });
+        }
+      }); 
+      // const restaurant = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      if (restList) {
+        setListOfRestaurant(restList);
+        setFilteredList(restList);
+      }
+    } catch (error) {
+      console.error("Fetching errror::", error);
+    }
+  }
 
-  // useEffect(()=> {
-  //   console.log("restaurantList from config",restaurantList);
-  //   setListOfRestaurant(restaurantList);
-  // },[]);
+  if (listOfRestaurant.length ===0) {
+    return <Shimmer/>
+  }
 
-  // useEffect(()=> {
-  //   console.log("listofRestaurant::",listOfRestaurant);
-  // },[listOfRestaurant]);
+  const handleSearch = (e) => {
+    const filteredRestaurants = filterData(searchText, listOfRestaurant);
+    setFilteredList(filteredRestaurants);
+    setSearchText(e.target.value);
+  }
 
-
-  const handleSearch = (event) => {
-    setSearchQuery(event.target.value);
-    const filteredList = restaurantList.filter((restaurant) =>
-      restaurant.data.name.toLowerCase().includes(event.target.value.toLowerCase())
+  const handleFilter = () => {
+    const filteredList = listOfRestaurant.filter(
+      (data) => data?.info?.avgRating >= 3.0
     );
-    setListOfRestaurant(filteredList);
-  };
+    setFilteredList(filteredList);
+  }
 
   return (
     <>
       <div className="search-container">
-        <input type="text" placeholder="Search restaurants" value={searchQuery}  className="search-input" onChange={handleSearch} />
-        <button className="searchBtn">
-          Search
-        </button>
+        <input type="text" placeholder="Search restaurants" value={searchText} className="search-input" onChange={handleSearch} />
       </div>
       <div className="filtercontainer">
         <button
           className="filter-btn"
-          onClick={() => {
-            // console.log("btn clicked");
-            const FilteredList = listOfRestaurant.filter(
-              (restaurant) => restaurant.data.avgRating > 4
-            );
-            // console.log("FilteredList", FilteredList);
-
-            setListOfRestaurant(FilteredList);
-          }}
+          onClick={handleFilter}
         >
           Top Rated Restaurant
         </button>
       </div>
       <div className="restaurant-list">
-      {listOfRestaurant.length > 0 ? (
-          listOfRestaurant.map((restaurant) => (
-            <RestaurantCard data={restaurant.data} key={restaurant.data.id} />
+        {listOfRestaurant.length > 0 ? (
+          listOfRestaurant.map((restaurant,index) => (
+            <RestaurantCard data={restaurant}
+              key={index} />
+
           ))
         ) : (
           <p>No restaurants available</p>
